@@ -2,8 +2,10 @@
 $db_user = 'root';     // ユーザー名
 $db_pass = 'gPByapMm7='; // パスワード
 $db_name = 'bbs';     // データベース名
+
 // MySQLに接続
 $mysqli = new mysqli('localhost', $db_user, $db_pass, $db_name);
+
 $result_message = ':D';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (!empty($_POST['name']) && !empty($_POST['message'])) {
@@ -13,8 +15,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result_message = 'メッセージを入力してください...XO';
   }
 }
+
 $result = $mysqli->query('SELECT * from `messages`');
-$sql = "SELECT * FROM messeges ORDER BY timestamp DESC";
+
+$sql = "SELECT * FROM messeges ORDER BY id DESC";
+
+
 ?>
 
 <html>
@@ -26,11 +32,15 @@ $sql = "SELECT * FROM messeges ORDER BY timestamp DESC";
   </head>
 
 <h1>簡易掲示板</h1>
-
-  <table class="table3" border=1>
+<link rel="stylesheet" href="boarding.css">
+  <table class="type01" >
 
   <thead>
-     <tr><th>名前</th><th>コメント</th><th>時間</th></tr>
+     <tr>
+       <th scope="cols">名前</th>
+       <th scope="cols">コメント</th>
+       <th scope="cols">時間</th>
+     </tr>
 </thead>
 
 <?php foreach ($result as $row){ ?>
